@@ -36,8 +36,8 @@ export default class ChangeOrderForm extends Component {
 
   render(){
     return (
-      <View>
-        <Text>Change Order Form</Text>
+      <View style={styles.container}>
+        <Text>Change Order Form Under Construction!</Text>
       </View>
     )
   }
@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems:'center',
-    
+    justifyContent:'center'
+
   },
-  
+
 
 
 
 })
-

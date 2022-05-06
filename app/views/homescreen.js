@@ -56,15 +56,15 @@ export default class Homescreen extends Component {
   render(){
     return (
       <View style={styles.container}>
-        
+
         <View style={styles.header}>
           <Text style={{marginTop:Margin.xxlargeMargin, paddingLeft:Padding.mediumPadding, color:"#FFF", fontFamily:Fonts.systemBoldFont, fontSize:Fonts.mediumFontSize}}>{auth.currentUser.email}</Text>
         </View>
         <View style={styles.homeScreenContent}>
             <Image source = {GriffinPoolsLogo} style={{ width: 255, height: 190, resizeMode:"contain"}}/>
             <View style={styles.buttonContainer}>
-                <TouchableHighlight 
-                underlayColor={"transparent"} 
+                <TouchableHighlight
+                underlayColor={"transparent"}
                 onPress={()=> this.props.navigation.navigate("CustomerDates")}
                 >
                   <View>
@@ -74,7 +74,7 @@ export default class Homescreen extends Component {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableHighlight
-                underlayColor={"transparent"} 
+                underlayColor={"transparent"}
                 onPress={()=> this.props.navigation.navigate("ChangeOrderForm")}
                 >
                   <View>
@@ -82,21 +82,21 @@ export default class Homescreen extends Component {
                   </View>
                 </TouchableHighlight>
             </View>
-            
-              
+
+
 
         </View>
 
         <View style={styles.settingsContainer} >
-              <TouchableHighlight onPress={this.renderModal}>
+              <TouchableHighlight onPress={this.handleSignOut} underlayColor={'transparent'}>
                 <View>
-                  <Ionicons name={'settings-outline'} size={48} color={'black'}/>
+                  <Ionicons name={'log-out-outline'} size={48} color={'black'}/>
                 </View>
               </TouchableHighlight>
         </View>
-       
-            
-         
+
+
+
       </View>
     )
   }
@@ -122,16 +122,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#E5E5E5",
     alignItems:'center',
-    
+
   },
 
-  
+
   header:{
     width:"100%",
     height:80,
     backgroundColor:Colors.primary,
-  }, 
-  
+  },
+
   homeScreenContent:{
     marginTop:Margin.xxlargeMargin*1.5,
   },
@@ -179,4 +179,3 @@ const styles = StyleSheet.create({
 
 
 })
-
