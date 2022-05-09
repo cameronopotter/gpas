@@ -47,7 +47,7 @@ export default class Login extends Component {
     }
 
 
-    
+
 
 
 
@@ -68,7 +68,7 @@ export default class Login extends Component {
        })
        .catch(error => alert(error.message))
       }
-      
+
     handleLogin = () => {
       auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
@@ -104,7 +104,7 @@ export default class Login extends Component {
             value = {this.state.password}
             onChangeText = {text => this.setPassword(text)}
             secureTextEntry
-            /> 
+            />
 
             <View style={styles.buttonContainer}>
                 <TouchableHighlight
@@ -114,8 +114,8 @@ export default class Login extends Component {
                 >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableHighlight>
-            
-            
+
+
                 <TouchableHighlight
                 onPress={this.handleSignUp}
                 style={[styles.button, styles.buttonOutline]}
@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E5E5",
     alignItems:'center',
     justifyContent:'center',
-    
+
   },
 
   inputContainer:{
     width:"80%",
-    
+
   },
 
   header:{
@@ -153,11 +153,11 @@ const styles = StyleSheet.create({
     height:80,
     backgroundColor:Colors.primary,
     position:'absolute',
-    left:0, 
+    left:0,
     right:0,
     top:0,
     bottom:800,
-  }, 
+  },
 
   input:{
     backgroundColor:'white',
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     fontFamily:Fonts.systemBoldFont,
     color:Colors.primary
   },
-  
+
   buttonOutline:{
     backgroundColor:'white',
     marginTop:Margin.smallMargin,
@@ -200,9 +200,8 @@ const styles = StyleSheet.create({
   topView:{
     marginBottom:Margin.largeMargin,
   },
-  
+
 
 
 
 })
-

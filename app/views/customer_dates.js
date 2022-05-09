@@ -2,7 +2,14 @@ import React, { Component } from "react"
 import { connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import {Ionicons} from "@expo/vector-icons";
-
+// Required to save to cache
+import * as FileSystem from 'expo-file-system';
+// ExcelJS
+import ExcelJS from 'exceljs';
+// Share excel via share dialog
+import * as Sharing from 'expo-sharing';
+// From @types/node/buffer
+import { Buffer as NodeBuffer } from 'buffer';
 
 import {
   StyleSheet,
@@ -33,11 +40,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Header from 'views/shared/header.js'
 import CustomerDetail from 'views/customer_detail.js'
+import GenerateExcel from 'functions/generate_excel.js'
 import AddCustomer from 'views/add_customer.js'
 
 const REFRESH_VIEW_HEIGHT = 80;
 
 const ref = firebase.firestore().collection("Customers")
+
 
 
 export default class CustomerDates extends Component {
@@ -50,6 +59,8 @@ export default class CustomerDates extends Component {
     setCustomerList:() => {},
     scrollY: new Animated.Value(0),
   }
+
+
 
 
 
@@ -133,11 +144,7 @@ export default class CustomerDates extends Component {
             }
 
 
-              // () => {
-              // addCustomer({
-              //   customerName:this.state.currentCustomer,
-              //   contractNumber:'21-151',
-              // }, this.onCustomerAdded())
+
 
             }
             underlayColor={"transparent"}
@@ -159,7 +166,13 @@ export default class CustomerDates extends Component {
         />
 
 
+
         </View>
+
+        <GenerateExcel customers={this.state.customers}/>
+
+
+
 
       </SafeAreaView>
     )
