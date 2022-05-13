@@ -2,6 +2,51 @@ import firebase from 'firebase/compat/app';
 import { doc, deleteDoc } from "firebase/firestore";
 
 
+
+export function addForm(form){
+    firebase.firestore()
+    .collection("ChangeOrderForms")
+    .add({
+        customerName:form.customerName,
+        address:form.address,
+        city:form.city,
+        state:form.state,
+        zip:form.zip,
+        homeTel:form.homeTel,
+        officeTel:form.officeTel,
+        contractNumber:form.contractNumber,
+        deletions:form.deletions,
+        createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+        id:""
+    }).then(console.log(form)).
+    catch((error) => console.log(error))
+}
+
+export function delForm(form){
+    firebase.firestore()
+    .collection("ChangeOrderForms")
+    .deleteDoc(doc(form))
+    .catch((error) => console.log(error))
+}
+
+export async function getForms(formsRetreived){
+
+    var formList = [];
+
+    var snapshot = await firebase.firestore()
+    .collection("ChangeOrderForms")
+    .orderBy('createdAt')
+    .get()
+
+    snapshot.forEach((doc) => {
+        formList.push(doc.data())
+    });
+
+    formsRetreived(formList);
+}
+
+
+
 export function addCustomer(customer){
     firebase.firestore()
     .collection("Customers")

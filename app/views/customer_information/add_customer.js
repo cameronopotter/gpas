@@ -43,7 +43,7 @@ const REFRESH_VIEW_HEIGHT = 80;
 export default class AddCustomer extends Component {
 
     state = {
-        currenCustomertName: null,
+        currentCustomerName: null,
         currentBackfillDate: null,
         currentConcretePourDate: null,
         currentContractDate: null,
@@ -58,9 +58,9 @@ export default class AddCustomer extends Component {
         currentDepositAmount:null,
         currentTotalContractValue:null,
         currentFinalAmountTotal:null,
-        
+
         scrollY: new Animated.Value(0),
-      }  
+      }
 
   render(){
     return (
@@ -75,11 +75,11 @@ export default class AddCustomer extends Component {
         contentContainerStyle={{marginBottom:100}}
         scrollEventThrottle={16}
         onScroll={this._onScroll}
-        showsVerticalScrollIndicator={false} 
+        showsVerticalScrollIndicator={false}
       >
       <View style={{paddingBottom:200}}>
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Customer Name"}
           style={styles.inputText}
           defaultValue={this.state.currentCustomerName}
@@ -91,7 +91,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Backfill Date"}
           style={styles.inputText}
           defaultValue={this.state.currentBackfillDate}
@@ -103,7 +103,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Concrete Pour Date"}
           style={styles.inputText}
           defaultValue={this.state.currentConcretePourDate}
@@ -113,9 +113,9 @@ export default class AddCustomer extends Component {
 
           />
         </View>
-        
+
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Contract Date"}
           style={styles.inputText}
           defaultValue={this.state.currentContractDate}
@@ -127,7 +127,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Contract Number"}
           style={styles.inputText}
           defaultValue={this.state.currentContractNumber}
@@ -141,7 +141,7 @@ export default class AddCustomer extends Component {
         <View style={[styles.inputContainer, {flexDirection:'row',justifyContent:'center', alignItems:'flex-end'}]}>
           <View style={{justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
             <Text style={{alignItems:'center',color:"#bdbdbd", justifyContent:'center', fontSize:Fonts.largeFontSize, paddingHorizontal:Padding.smallPadding}}>Deck Completed</Text>
-            <Switch 
+            <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
             shape={"pill"}
             style={{alignItems:'flex-end', marginLeft:'auto'}}
@@ -155,7 +155,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Dig Date"}
           style={styles.inputText}
           defaultValue={this.state.currentDigDate}
@@ -169,7 +169,7 @@ export default class AddCustomer extends Component {
         <View style={[styles.inputContainer, {flexDirection:'row',justifyContent:'center', alignItems:'flex-end'}]}>
           <View style={{justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
             <Text style={{alignItems:'center',color:"#bdbdbd", justifyContent:'center', fontSize:Fonts.largeFontSize, paddingHorizontal:Padding.smallPadding}}>Electrical Completed</Text>
-            <Switch 
+            <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
             shape={"pill"}
             style={{alignItems:'flex-end', marginLeft:'auto'}}
@@ -183,7 +183,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Finance Name"}
           style={styles.inputText}
           defaultValue={this.state.currentFinanceName}
@@ -195,7 +195,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Liner Install Date"}
           style={styles.inputText}
           defaultValue={this.state.currentLinerInstallDate}
@@ -207,7 +207,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Middle Payment Date"}
           style={styles.inputText}
           defaultValue={this.state.currentMiddlePaymentCollected}
@@ -219,7 +219,7 @@ export default class AddCustomer extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <TextInput 
+          <TextInput
           placeholder={"Pool Approval Date"}
           style={styles.inputText}
           defaultValue={this.state.currentPoolLayoutApprovalDate}
@@ -235,7 +235,7 @@ export default class AddCustomer extends Component {
 
         </View>
         </ScrollView>
-        
+
         <View style={[styles.saveBackContainer, {backgroundColor:Colors.primaryLight}]}>
             <View style={styles.saveButton}>
                <TouchableHighlight
@@ -279,8 +279,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent:'center',
-    
-    
+
+
   },
 
   inputText:{
@@ -339,9 +339,8 @@ const styles = StyleSheet.create({
     borderRadius: Sizes.smallBorderRadius,
     alignSelf: 'center',
   },
-  
+
 
 
 
 })
-

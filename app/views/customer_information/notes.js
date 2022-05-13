@@ -39,7 +39,7 @@ const REFRESH_VIEW_HEIGHT = 80;
 
 
 export default class Notes extends Component {
- sss   
+ sss
 state = {
     notesText:"",
 }
@@ -71,7 +71,7 @@ state = {
                  firebase.firestore().collection("Customers").doc(item.id).update({notes:this.state.notesText}).then(()=>{
                     this.props.navigation.goBack()
                     console.log(item)})
-                    .catch((error)=>{ 
+                    .catch((error)=>{
                         console.log("Error removing document:", error)
                     })
                 }}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems:'center',
-    
+
   },
 
   inputText:{
@@ -144,9 +144,8 @@ const styles = StyleSheet.create({
     borderRadius: Sizes.smallBorderRadius,
     alignSelf: 'center',
   },
-  
+
 
 
 
 })
-

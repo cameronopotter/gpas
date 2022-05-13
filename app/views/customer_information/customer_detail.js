@@ -29,7 +29,7 @@ import { addCustomer, getCustomers, delCustomer} from "app/classes/griffin_api.j
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import Notes from 'views/notes.js'
+import Notes from 'views/customer_information/notes.js'
 
 
 
@@ -41,7 +41,7 @@ export default class CustomerDetail extends Component {
 
     state = {
         scrollY: new Animated.Value(0),
-    } 
+    }
 
 
     render(){
@@ -128,10 +128,10 @@ export default class CustomerDetail extends Component {
                     <Text style={styles.valueTextStyle}>{item.finalAmountTotal ? `$ ${item.finalAmountTotal}`: "Empty Field"}</Text>
                 </View>
 
-                
 
-                
-            
+
+
+
 
             </View>
 
@@ -140,19 +140,19 @@ export default class CustomerDetail extends Component {
             underlayColor={'transparent'}
             onPress={() => {
                 firebase.firestore().collection("Customers").doc(item.id).delete().then(()=>{
-                    this.props.navigation.goBack()
+                    this.props.navigation.navigate("Homescreen")
                     console.log("successfully deleted! ")})
-                    .catch((error)=>{ 
+                    .catch((error)=>{
                         console.log("Error removing document:", error)
                     })
             }}
-            >               
+            >
                 <View style={styles.deleteButtonContainer}>
                     <Text style={{fontFamily:Fonts.systemBoldFont, fontSize:Fonts.mediumFontSize}}>Delete Customer</Text>
                 </View>
             </TouchableHighlight>
 
-            <TouchableHighlight 
+            <TouchableHighlight
             underlayColor={'transparent'}
             onPress={() => {
                 this.props.navigation.navigate("Notes", {item:item})
@@ -168,7 +168,7 @@ export default class CustomerDetail extends Component {
     }
 
 
-  
+
 }
 
 const styles = StyleSheet.create({
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems:'center',
-    
+
   },
 
   keyTextStyle:{
@@ -196,12 +196,12 @@ const styles = StyleSheet.create({
     },
 
     deleteButtonContainer:{
-        justifyContent:'center', 
-        alignItems:'center', 
-        paddingHorizontal:Padding.smallPadding, 
-        borderRadius:Sizes.smallBorderRadius, 
+        justifyContent:'center',
+        alignItems:'center',
+        paddingHorizontal:Padding.smallPadding,
+        borderRadius:Sizes.smallBorderRadius,
         paddingVertical:Padding.smallPadding,
-        marginTop:Margin.mediumMargin, 
+        marginTop:Margin.mediumMargin,
         backgroundColor:Colors.danger,
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
     },
 
     notesButtonContainer:{
-        justifyContent:'center', 
-        alignItems:'center', 
-        paddingHorizontal:Padding.smallPadding, 
-        borderRadius:Sizes.smallBorderRadius, 
+        justifyContent:'center',
+        alignItems:'center',
+        paddingHorizontal:Padding.smallPadding,
+        borderRadius:Sizes.smallBorderRadius,
         paddingVertical:Padding.smallPadding,
-        marginTop:Margin.mediumMargin, 
+        marginTop:Margin.mediumMargin,
         backgroundColor:"#c4c4c4",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
@@ -224,9 +224,8 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
 
     },
-  
+
 
 
 
 })
-

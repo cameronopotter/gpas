@@ -68,7 +68,7 @@ export default class Homescreen extends Component {
                 onPress={()=> this.props.navigation.navigate("CustomerDates")}
                 >
                   <View>
-                    <Text style={styles.buttonText}>View Customer Dates</Text>
+                    <Text style={styles.buttonText}>Customer Information</Text>
                   </View>
                 </TouchableHighlight>
             </View>
@@ -78,7 +78,7 @@ export default class Homescreen extends Component {
                 onPress={()=> this.props.navigation.navigate("ChangeOrderForm")}
                 >
                   <View>
-                    <Text style={styles.buttonText}>Change Order Form</Text>
+                    <Text style={styles.buttonText}>Change Order Forms</Text>
                   </View>
                 </TouchableHighlight>
             </View>
