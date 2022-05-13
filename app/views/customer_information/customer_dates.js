@@ -39,9 +39,9 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Header from 'views/shared/header.js'
-import CustomerDetail from 'views/customer_detail.js'
+import CustomerDetail from 'views/customer_information/customer_detail.js'
 import GenerateExcel from 'functions/generate_excel.js'
-import AddCustomer from 'views/add_customer.js'
+import AddCustomer from 'views/customer_information/add_customer.js'
 
 const REFRESH_VIEW_HEIGHT = 80;
 
@@ -55,13 +55,16 @@ export default class CustomerDates extends Component {
     customerList: [],
     currentCustomer: null,
     loading:false,
+    isFetching:false,
     customers:{},
     setCustomerList:() => {},
     scrollY: new Animated.Value(0),
   }
 
 
-
+  onRefresh() {
+    this.setState({isFetching: true,},() => {this.getCustomers();});
+}
 
 
   getCustomers() {
@@ -76,7 +79,7 @@ export default class CustomerDates extends Component {
          doc.ref.update({id:doc.id})
         });
 
-        this.setState({loading:false});
+        this.setState({loading:false, isFetching:false});
       })
 
     }
@@ -159,6 +162,8 @@ export default class CustomerDates extends Component {
 
           <Animated.FlatList
           data={this.state.customers}
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.isFetching}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) => this.renderItem(item, index)}
           onScroll={this._onScroll}

@@ -36,8 +36,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Header from 'views/shared/header.js'
-import CustomerDetail from 'views/customer_detail.js'
-import AddCustomer from 'views/add_customer.js'
+import CustomerDetail from 'views/customer_information/customer_detail.js'
+import AddCustomer from 'views/customer_information/add_customer.js'
 
 
 
