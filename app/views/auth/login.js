@@ -93,6 +93,7 @@ export default class Login extends Component {
         <View style={styles.inputContainer}>
             <TextInput
             placeholder="Email"
+            placeHolderTextColor="red"
             style={styles.input}
             value = {this.state.email}
             onChangeText = {text => this.setEmail(text)}
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
 
   input:{
     backgroundColor:'white',
+    color:'black',
     paddingHorizontal:Padding.mediumPadding,
     paddingVertical:Padding.mediumPadding,
     borderRadius:Sizes.smallBorderRadius,
