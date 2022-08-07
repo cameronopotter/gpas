@@ -53,6 +53,7 @@ export function addCustomer(customer){
     .add({
         customerName: customer.customerName,
         contractNumber: customer.contractNumber,
+        address: customer.address,
         backfillDate:customer.backfillDate,
         concretePourDate:customer.concretePourDate,
         contractDate:customer.contractDate,

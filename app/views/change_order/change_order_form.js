@@ -51,6 +51,9 @@ export default class ChangeOrderForm extends Component {
     currentForm: null,
     loading:false,
     isFetching:false,
+    searchInput:"",
+    isSearchingByName:true,
+    allCustomers:{},
     forms:{},
     setFormList:() => {},
     scrollY: new Animated.Value(0),
@@ -69,7 +72,7 @@ export default class ChangeOrderForm extends Component {
         const items=[];
         querySnapshot.forEach((doc) => {
           items.push(doc.data());
-         this.setState({forms: items});
+         this.setState({forms: items, allCustomers:items});
          doc.ref.update({id:doc.id})
         });
 
@@ -113,6 +116,42 @@ export default class ChangeOrderForm extends Component {
     }));
   }
 
+  searchForName = (input) => {
+    this.setState({searchInput:input})
+    if(input == ""){
+        console.log("NOTHING");
+        this.getForms();
+    }
+
+    let data = this.state.allCustomers;
+    let searchData = data.filter((item) => {
+      return item.customerName.toLowerCase().includes(input.toLowerCase());
+    })
+    this.setState({forms:searchData})
+  }
+
+  searchForAddress = (input) => {
+    this.setState({searchInput:input})
+    if(input == ""){
+        console.log("NOTHING");
+        this.getForms();
+    }
+
+    let data = this.state.allCustomers;
+    let searchData = data.filter((item) => {
+      console.log(item)
+      return item.address.toLowerCase().includes(input.toLowerCase());
+    })
+    this.setState({forms:searchData})
+  }
+
+  handleKeyPress = (e) => {
+    if(e.nativeEvent.key == "Backspace"){
+
+    }
+  }
+
+
 
 
   render(){
@@ -152,6 +191,32 @@ export default class ChangeOrderForm extends Component {
             </TouchableHighlight>
 
             </View>
+
+            <View style={{justifyContent:"space-between", marginBottom:Margin.largeMargin, marginHorizontal:Margin.largeMargin, alignItems:"center", flexDirection:"row", }}>
+              <View style={{justifyContent:"center",  paddingHorizontal:Padding.xlargePadding*2,paddingVertical:Padding.smallPadding, alignItems:"center", borderWidth:2, borderRadius:Sizes.smallBorderRadius,borderColor:Colors.convertHexToRGBA(Colors.primary, .3)}}>
+                <TextInput
+                  placeholder= {this.state.isSearchingByName ? "Search Name" : "Search Address"}
+                  onChangeText={(input) => {
+                    this.state.isSearchingByName ? this.searchForName(input) : this.searchForAddress(input)
+                  }}
+                  onKeyPress={(e) => this.handleKeyPress(e)}
+                />
+
+
+              </View>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setState({isSearchingByName:!this.state.isSearchingByName})
+                }}
+                underlayColor={"transparent"}
+              >
+                <View style={{textAlign:"center", paddingVertical:Padding.smallPadding+2, paddingHorizontal:Padding.mediumPadding, backgroundColor:Colors.primaryLight, borderRadius:Sizes.mediumBorderRadius}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, color:"#fff", fontSize:Fonts.mediumFontSize}}>{this.state.isSearchingByName ? "Name" : "Address"}</Text>
+                </View>
+              </TouchableHighlight>
+
+            </View>
+
 
 
           <Animated.FlatList

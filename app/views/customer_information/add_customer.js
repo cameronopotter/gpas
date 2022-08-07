@@ -45,6 +45,7 @@ export default class AddCustomer extends Component {
     state = {
         currentCustomerName: null,
         currentBackfillDate: null,
+        currentAddress:null,
         currentConcretePourDate: null,
         currentContractDate: null,
         currentContractNumber: null,
@@ -85,6 +86,18 @@ export default class AddCustomer extends Component {
           defaultValue={this.state.currentCustomerName}
           onChangeText={(name) => {
             this.setState({currentCustomerName:name})
+          }}
+
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+          placeholder={"Customer Address"}
+          style={styles.inputText}
+          defaultValue={this.state.currentAddress}
+          onChangeText={(name) => {
+            this.setState({currentAddress:name})
           }}
 
           />

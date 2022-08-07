@@ -59,6 +59,11 @@ export default class CustomerDetail extends Component {
                 </View>
 
                 <View style={{flexDirection:"row"}}>
+                    <Text style={styles.keyTextStyle}>Customer Address: </Text>
+                    <Text style={styles.valueTextStyle}>{item.address ? item.address: "Empty Field"}</Text>
+                </View>
+
+                <View style={{flexDirection:"row"}}>
                     <Text style={styles.keyTextStyle}>Contract Number: </Text>
                     <Text style={styles.valueTextStyle}>{item.contractNumber ? item.contractNumber: "Empty Field"}</Text>
                 </View>
