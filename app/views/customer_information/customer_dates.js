@@ -84,7 +84,6 @@ export default class CustomerDates extends Component {
 
         this.setState({loading:false, isFetching:false});
       })
-
     }
 
     )
