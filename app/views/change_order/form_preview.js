@@ -29,7 +29,6 @@ import { addForm, getForms, delForm} from "app/classes/griffin_api.js"
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import Export from "functions/export";
 
 
 

@@ -126,9 +126,23 @@ export default class FormDetail extends Component {
                 </View>
             </TouchableHighlight>
 
+            <View style={{width:20}}></View>
+
+            <TouchableHighlight
+            onPress={()=>this.props.navigation.navigate("FormPreview", {item:item, index:index})}
+            underlayColor={"transparent"}
+            >
+              <View style={[styles.deleteButtonContainer,{justifyContent:"center", alignItems:"center", backgroundColor:Colors.brandDefault}]}>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"center",fontSize:Fonts.mediumFontSize}}>Print Preview</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
 
 
-        </View>
+
+
+      
+
     )
     }
 
