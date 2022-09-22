@@ -16,6 +16,7 @@
     "atob": "2.1.2",
     "base-64": "^1.0.0",
     "dotenv": "^16.0.0",
+    "eas-cli": "^2.1.0",
     "exceljs": "^4.3.0",
     "expo": "~44.0.0",
     "expo-file-system": "~13.1.4",
@@ -32,9 +33,11 @@
     "react-native-screens": "~3.10.1",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "0.17.1",
+    "react-native-webview": "^11.23.1",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^8.0.1",
+    "react-to-print": "^2.14.7",
     "redux": "^4.2.0"
   },
   "devDependencies": {

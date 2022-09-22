@@ -53,13 +53,14 @@ export default class EditForm extends Component {
         currentMisc:null,
         currentAdjustedAmt:null,
         currentDeletions: null,
-        currentTotalAdjustedAmount:null,
 
         scrollY: new Animated.Value(0),
       }
 
   render(){
-
+    const item= this.props.route.params.item
+    const index = this.props.route.params.index
+    const docRef = firebase.firestore().collection("ChangeOrderForms").doc(item.id).get()
     return (
 
       <View style={styles.container}>
@@ -79,7 +80,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Customer Name"}
           style={styles.inputText}
-          defaultValue={this.state.currentCustomerName}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentCustomerName:name})
           }}
@@ -91,7 +92,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Current Balance"}
           style={styles.inputText}
-          defaultValue={this.state.currentCustomerBalance}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentCustomerBalance:name})
           }}
@@ -103,7 +104,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Stump Removal"}
           style={styles.inputText}
-          defaultValue={this.state.currentStumpRemoval}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentStumpRemoval:name})
           }}
@@ -115,7 +116,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Gravel"}
           style={styles.inputText}
-          defaultValue={this.state.currentGravel}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentGravel:name})
           }}
@@ -127,7 +128,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Dirt Removal"}
           style={styles.inputText}
-          defaultValue={this.state.currentDirtRemoval}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentDirtRemoval:name})
           }}
@@ -139,7 +140,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Concrete Pump Charge"}
           style={styles.inputText}
-          defaultValue={this.state.currentConcretePumpCharge}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentConcretePumpCharge:name})
           }}
@@ -151,7 +152,7 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Fill Dirt"}
           style={styles.inputText}
-          defaultValue={this.state.currentFillDirt}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentFillDirt:name})
           }}
@@ -169,33 +170,31 @@ export default class EditForm extends Component {
           <TextInput
           placeholder={"Deletions"}
           style={styles.inputText}
-          defaultValue={this.state.currentDeletions}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentDeletions:name})
           }}
 
           />
         </View>
-
         <View style={styles.inputContainer}>
           <TextInput
           placeholder={"Misc"}
           style={styles.inputText}
-          defaultValue={this.state.currentMisc}
+          defaultValue={null}
           onChangeText={(name) => {
             this.setState({currentMisc:name})
           }}
 
           />
         </View>
-
         <View style={styles.inputContainer}>
           <TextInput
           placeholder={"Total Adjusted Amount"}
           style={styles.inputText}
-          defaultValue={this.state.currentTotalAdjustedAmount}
+          defaultValue={null}
           onChangeText={(name) => {
-            this.setState({currentTotalAdjustedAmount:name})
+            this.setState({currentAdjustedAmt:name})
           }}
 
           />
@@ -214,7 +213,11 @@ export default class EditForm extends Component {
                  style={[styles.saveContainer, {backgroundColor: Colors.primary}]}
                  underlayColor={Colors.convertHexToRGBA(Colors.primary, .95)}
                  onPress={() => {
-                  addForm({
+                  firebase.firestore().collection("ChangeOrderForms").doc(item.id).delete().then(()=>{
+                       console.log("successfully deleted! ")})
+                       .catch((error)=>{
+                           console.log("Error removing document:", error)
+                       }).then(() => {addForm({
                   customerName:this.state.currentCustomerName ?this.state.currentCustomerName : null,
                   currentBalance:this.state.currentCustomerBalance ? this.state.currentCustomerBalance : null,
                   stumpRemoval:this.state.currentStumpRemoval ? this.state.currentStumpRemoval : null,
@@ -224,8 +227,8 @@ export default class EditForm extends Component {
                   fillDirt:this.state.currentFillDirt ? this.state.currentFillDirt : null,
                   deletions:this.state.currentDeletions ? this.state.currentDeletions : null,
                   misc:this.state.currentMisc ? this.state.currentMisc : null,
-                  totalAdjustedAmount:this.state.currentTotalAdjustedAmount ? this.state.currentTotalAdjustedAmount : null,
-                 }, this.props.navigation.goBack())
+                  totalAdjustedAmount:this.state.currentAdjustedAmt ? this.state.currentAdjustedAmt : null,
+                }, this.props.navigation.navigate("ChangeOrderForm"))})
                }
               }
                >

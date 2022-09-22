@@ -29,7 +29,7 @@ import { addForm, getForms, delForm} from "app/classes/griffin_api.js"
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+import Wrapper from "functions/component_to_print.js"
 
 
 
@@ -43,10 +43,18 @@ export default class FormPreview extends Component {
         screenCapture: '',
     }
 
+    // render(){
+    //   return(
+    //     <View>
+    //       <Wrapper />
+    //     </View>
+    //   )
+    // }
 
 
 
-    render(){
+
+     render(){
     const item= this.props.route.params.item
     const index = this.props.route.params.index
     const docRef = firebase.firestore().collection("ChangeOrderForms").doc(item.id).get()
@@ -126,7 +134,7 @@ export default class FormPreview extends Component {
             </View>
         </View>
     )
-    }
+  }
 
 
 

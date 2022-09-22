@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
 
 // This returns a local uri that can be shared
   const generateShareableExcel = async (props): Promise<string> => {
-  console.log(props.customers)
-  const list = props.customers;
+  console.log("")
+  const item = props.item;
+  const list = Object.entries(item);
   const now = new Date();
   const fileName = 'CustomerData.xlsx';
   const fileUri = FileSystem.cacheDirectory + fileName;
@@ -78,37 +79,47 @@ const styles = StyleSheet.create({
     const worksheet = workbook.addWorksheet('My Sheet', {});
     // Just some columns as used on ExcelJS Readme
     worksheet.columns = [
-      { header: 'Id', key: 'id', width: 5 },
-      { header: 'Customer Name', key: 'customerName', width: 28 },
-      { header: 'Contract Number', key: 'contractNumber', width:28},
-      { header: 'Dig Date', key: 'digDate', width: 18, },
-      { header: 'Liner/Shell Install Date', key: 'linerInstallDate', width: 28, },
-      { header: 'Middle Payment', key: 'middlePaymentCollected', width: 28, },
-      { header: 'Backfill Date', key: 'backfillDate', width: 20, },
-      { header: 'Deck Layout', key: 'deckLayoutCompleted', width: 20, },
-      { header: 'Concrete Date', key: 'concretePourDate', width: 28, },
+      { header: 'Field', key: 'desc', width: 58 },
+      { header: 'Information', key: 'value', width: 58 },
+
     ];
     // Add some test data
-    for(let index = 0; index < list.length; ++index){
-      worksheet.addRow({ id: index+1 , customerName: list[index].customerName, contractNumber: list[index].contractNumber,
-          digDate:list[index].digDate,
-            linerInstallDate:list[index].linerInstallDate, middlePaymentCollected:list[index].middlePaymentCollected,
-              backfillDate:list[index].backfillDate, deckLayoutCompleted:list[index].deckLayoutCompleted,
-                concretePourDate:list[index].concretePourDate, });
 
-    }
+
+      worksheet.addRow({id:0, desc:"Customer Name", value:list[findKey(list, "customerName")][1]});
+      worksheet.addRow({id:0, desc:"Current Balance", value:list[findKey(list, "currentBalance")][1]});
+      worksheet.addRow({id:0, desc:"Stump Removal", value:list[findKey(list, "stumpRemoval")][1]});
+      worksheet.addRow({id:0, desc:"Gravel", value:list[findKey(list, "gravel")][1]});
+      worksheet.addRow({id:0, desc:"Dirt Removal", value:list[findKey(list, "dirtRemoval")][1]});
+      worksheet.addRow({id:0, desc:"Concrete Pump Charge", value:list[findKey(list, "concretePumpCharge")][1]});
+      worksheet.addRow({id:0, desc:"Fill Dirt", value:list[findKey(list, "fillDirt")][1]});
+      worksheet.addRow({id:0, desc:"Deletions", value:list[findKey(list, "deletions")][1]});
+      worksheet.addRow({id:0, desc:"Misc", value:list[findKey(list, "misc")][1]});
+      worksheet.addRow({id:0, desc:"Total Adjusted Amount", value:list[findKey(list, "totalAdjustedAmount")][1]});
+
+
+
+
+
+
+
 
 
     // Test styling
 
     // Style first row
     worksheet.getRow(1).font = {
-      name: 'Comic Sans MS', family: 4, size: 16, underline: 'double', bold: true
+      name: 'Comic Sans MS', family: 4, size: 36, underline: 'double', bold: true
     };
-    // Style second column
-    worksheet.eachRow((row, rowNumber) => {
 
-    });
+    for(let index = 2; index < list.length; index++){
+    worksheet.getRow(index).font = {
+      name: 'Comic Sans MS', family: 4, size: 24,  bold: false
+    };
+  }
+
+    // Style second column
+
 
     // Write to file
     workbook.xlsx.writeBuffer().then((buffer: ExcelJS.Buffer) => {
@@ -122,6 +133,16 @@ const styles = StyleSheet.create({
       });
     });
   });
+}
+
+function findKey(listArray, keyFind){
+
+  for(let index = 0; index<listArray.length; ++index){
+    if(listArray[index][0].toString() == keyFind){
+      return index;
+    }
+  }
+
 }
 
 
@@ -138,7 +159,7 @@ const shareExcel = async (props) => {
   });
 }
 
-export default function GenerateExcel(props) {
+export default function GenerateFormExcel(props) {
 
   return(
     <View style={{width:"100%", height:200, marginTop:-Margin.xxlargeMargin * 2, backgroundColor:Colors.primaryLight}}>
