@@ -258,6 +258,7 @@ export default class AddCustomer extends Component {
                   addCustomer({
                   customerName:this.state.currentCustomerName ?this.state.currentCustomerName : null,
                   contractNumber:this.state.currentContractNumber ?this.state.currentContractNumber : null,
+                  address:this.state.currentAddress ? this.state.currentAddress : null,
                   backfillDate:this.state.currentBackfillDate ? this.state.currentBackfillDate : null,
                   concretePourDate:this.state.currentConcretePourDate ?this.state.currentConcretePourDate : null,
                   contractDate:this.state.currentContractDate ? this.state.currentContractDate : null,
