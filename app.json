@@ -3,6 +3,7 @@
     "name": "gpas",
     "slug": "gpas",
     "version": "1.0.0",
+    "owner":"cameronopotter",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

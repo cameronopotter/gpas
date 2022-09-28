@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>gpas.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>7B23630090365C5598FDEC8781556CB62CAA67E8</string>
+				<key>dateExpires</key>
+				<string>9/26/23</string>
+				<key>type</key>
+				<string>Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>BQUXL9AA4F.com.cameronopotter.gpas-demo</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>BQUXL9AA4F</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>gpas.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>0f1ca09d-ded4-41a7-b27b-0434ce2e9dc8</string>
+				<key>dateExpires</key>
+				<string>9/26/23</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.cameronopotter.gpas-demo</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>BQUXL9AA4F</string>
+				<key>name</key>
+				<string>Cameron Potter</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

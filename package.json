@@ -21,7 +21,9 @@
     "expo-dev-client": "~0.8.6",
     "expo-file-system": "~13.1.4",
     "expo-sharing": "~10.1.0",
+    "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
+    "expo-updates": "~0.11.7",
     "firebase": "9.0.0",
     "native-base": "^3.4.11",
     "react": "17.0.1",
@@ -38,8 +40,7 @@
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^8.0.1",
     "react-to-print": "^2.14.7",
-    "redux": "^4.2.0",
-    "expo-splash-screen": "~0.14.1"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
