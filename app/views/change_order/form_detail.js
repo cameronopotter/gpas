@@ -26,10 +26,12 @@ import {
 import { Sizes, Colors, Padding, Margin, Fonts } from "app/styles"
 import GriffinPoolsLogo from "images/griffin-logo.png"
 import { addForm, getForms, delForm} from "app/classes/griffin_api.js"
+import EditForm from "views/change_order/edit_form.js"
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+import ComponentToPrint from 'functions/component_to_print.js'
+import GenerateFormExcel from 'functions/generate_form_excel.js'
 
 
 
@@ -48,60 +50,70 @@ export default class FormDetail extends Component {
     const index = this.props.route.params.index
     const docRef = firebase.firestore().collection("ChangeOrderForms").doc(item.id).get()
     return (
-        <View style={{justifyContent:'center', alignItems:'center'}}>
+      <View>
+      <ScrollView style={{marginBottom:75}}>
+        <View style={{justifyContent:'center', alignItems:'center', paddingBottom:50}}>
             <Header style={{marginTop:-30}}/>
-            <Text style={{fontSize:Fonts.largeFontSize*1.2, fontFamily:Fonts.systemBoldFont, marginTop:Margin.mediumMargin, marginBottom:Margin.mediumMargin}}>Customer Information</Text>
-            <View style={{marginTop:Margin.mediumMargin}}>
+            <View style={{marginTop:40}}>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Customer Name: </Text>
-                    <Text style={styles.valueTextStyle}>{item.customerName ? item.customerName: "Empty Field"}</Text>
+            <View style={{justifyContent:"center", alignItems:"center", marginBottom:20}}>
+              <Image source ={GriffinPoolsLogo} style={styles.imageStyle}/>
+            </View>
+            <View style={{alignItems:"center", marginTop:-Margin.smallMargin}}>
+              <Text style={{fontFamily:Fonts.systemBoldFont, fontSize:Fonts.xlargeFontSize, textDecorationLine:"underline"}}>Change Order Form</Text>
+            </View>
+
+            <View style={{flexDirection:"row", paddingTop:Padding.largePadding, marginLeft:Margin.mediumMargin, justifyContent:"flex-start"}}>
+              <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>CUSTOMER NAME:</Text>
+              <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.customerName}</Text>
+            </View>
+
+            <View style={{flexDirection:"row", paddingTop:Padding.mediumPadding, marginLeft:Margin.mediumMargin, justifyContent:"flex-start"}}>
+              <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>CURRENT BALANCE:</Text>
+              <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>${item.currentBalance}</Text>
+            </View>
+
+            <View style={{flexDirection:"column", paddingTop:Padding.mediumPadding, marginLeft:Margin.mediumMargin, justifyContent:"flex-start"}}>
+              <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>ADDITIONS</Text>
+              <View style={{flexDirection:"column"}}>
+                <View style={{flexDirection:"row", marginLeft:Margin.mediumMargin,marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>STUMP REMOVAL:</Text>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.stumpRemoval ? item.stumpRemoval : "Empty" }</Text>
                 </View>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Address: </Text>
-                    <Text style={styles.valueTextStyle}>{item.address ? item.address: "Empty Field"}</Text>
+                <View style={{flexDirection:"row", marginLeft:Margin.mediumMargin,marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>GRAVEL:</Text>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.gravel ? item.gravel : "Empty" }</Text>
                 </View>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>City: </Text>
-                    <Text style={styles.valueTextStyle}>{item.city ? item.city: "Empty Field"}</Text>
+                <View style={{flexDirection:"row", marginLeft:Margin.mediumMargin,marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>DIRT REMOVAL:</Text>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.dirtRemoval ? item.dirtRemoval : "Empty" }</Text>
                 </View>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>State: </Text>
-                    <Text style={styles.valueTextStyle}>{item.state ? item.state: "Empty Field"}</Text>
+                <View style={{flexDirection:"row", marginLeft:Margin.mediumMargin,marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>CONCRETE PUMP CHARGE:</Text>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.concretePumpCharge ? item.concretePumpCharge : "Empty" }</Text>
                 </View>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Zip: </Text>
-                    <Text style={styles.valueTextStyle}>{item.zip ? item.zip: "Empty Field"}</Text>
+                <View style={{flexDirection:"row", marginLeft:Margin.mediumMargin,marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>FILL DIRT:</Text>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.fillDirt ? item.fillDirt : "Empty" }</Text>
                 </View>
+              </View>
+              <View style={{flexDirection:"row", marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>DELETIONS:</Text>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.deletions ? item.deletions : "__________________________________"}</Text>
+              </View>
+              <View style={{flexDirection:"row", marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>MISC:</Text>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.misc ? item.misc : "__________________________________"}</Text>
+              </View>
 
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Home Telephone: </Text>
-                    <Text style={styles.valueTextStyle}>{item.homeTel ? item.homeTel: "Empty Field"}</Text>
-                </View>
-
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Office Telephone: </Text>
-                    <Text style={styles.valueTextStyle}>{item.officeTel ? item.officeTel: "Empty Field"}</Text>
-                </View>
-
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Contract Number: </Text>
-                    <Text style={styles.valueTextStyle}>{item.contractNumber ? item.contractNumber: "Empty Field"}</Text>
-                </View>
-
-                <View style={{flexDirection:"row"}}>
-                    <Text style={styles.keyTextStyle}>Deletions: </Text>
-                    <Text style={styles.valueTextStyle}>{item.deletions ? item.deletions: "Empty Field"}</Text>
-                </View>
-
-
-
-
-
+              <View style={{flexDirection:"row", marginTop: Margin.mediumMargin,justifyContent:"flex-start"}}>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", color:Colors.text80, marginRight:Margin.smallMargin,fontSize:Fonts.largeFontSize}}>TOTAL ADJUSTED AMOUNT:</Text>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"left", fontSize:Fonts.largeFontSize, textDecorationLine:"underline"}}>{item.totalAdjustedAmount ? item.totalAdjustedAmount : "______________"}</Text>
+              </View>
 
 
 
@@ -110,11 +122,26 @@ export default class FormDetail extends Component {
             </View>
 
 
+
+
+
+
+            </View>
+
+            <TouchableHighlight
+            onPress={()=>this.props.navigation.navigate("EditForm", {item:item, index:index})}
+            underlayColor={"transparent"}
+            >
+              <View style={[styles.deleteButtonContainer,{justifyContent:"center", alignItems:"center", backgroundColor:Colors.brandDefault}]}>
+                <Text style={{fontFamily:Fonts.systemBoldFont, textAlign:"center",fontSize:Fonts.mediumFontSize}}>Edit Form</Text>
+              </View>
+            </TouchableHighlight>
+
             <TouchableHighlight
             underlayColor={'transparent'}
             onPress={() => {
                 firebase.firestore().collection("ChangeOrderForms").doc(item.id).delete().then(()=>{
-                    this.props.navigation.navigate("Homescreen")
+                    this.props.navigation.navigate("ChangeOrderForm")
                     console.log("successfully deleted! ")})
                     .catch((error)=>{
                         console.log("Error removing document:", error)
@@ -126,9 +153,20 @@ export default class FormDetail extends Component {
                 </View>
             </TouchableHighlight>
 
+            <View style={{width:20}}></View>
 
 
-        </View>
+          </View>
+
+          </ScrollView>
+          <GenerateFormExcel item={item} />
+          </View>
+
+
+
+
+
+
     )
     }
 

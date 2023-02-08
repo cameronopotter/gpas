@@ -56,6 +56,9 @@ export default class CustomerDates extends Component {
     currentCustomer: null,
     loading:false,
     isFetching:false,
+    searchInput:"",
+    isSearchingByName:true,
+    allCustomers:{},
     customers:{},
     setCustomerList:() => {},
     scrollY: new Animated.Value(0),
@@ -75,13 +78,12 @@ export default class CustomerDates extends Component {
         const items=[];
         querySnapshot.forEach((doc) => {
           items.push(doc.data());
-         this.setState({customers: items});
+         this.setState({customers: items, allCustomers:items});
          doc.ref.update({id:doc.id})
         });
 
         this.setState({loading:false, isFetching:false});
       })
-
     }
 
     )
@@ -119,13 +121,51 @@ export default class CustomerDates extends Component {
     }));
   }
 
+  searchForName = (input) => {
+    this.setState({searchInput:input})
+    if(input == ""){
+        console.log("NOTHING");
+        this.getCustomers();
+    }
+
+    let data = this.state.allCustomers;
+    let searchData = data.filter((item) => {
+      return item.customerName.toLowerCase().includes(input.toLowerCase());
+    })
+    this.setState({customers:searchData})
+  }
+
+  searchForAddress = (input) => {
+    this.setState({searchInput:input})
+    if(input == ""){
+        console.log("NOTHING");
+        this.getCustomers();
+    }
+
+    let data = this.state.allCustomers;
+    let searchData = data.filter((item) => {
+      return item.address.toLowerCase().includes(input.toLowerCase());
+    })
+    this.setState({customers:searchData})
+  }
+
+  handleKeyPress = (e) => {
+    if(e.nativeEvent.key == "Backspace"){
+
+    }
+  }
+
+
+
 
 
   render(){
     return (
+
       <SafeAreaView>
         <View style={styles.container}>
           <Header/>
+
 
 
           <View style={{flexDirection:'row', justifyContent:'space-between',marginTop:Margin.mediumMargin, marginBottom:Margin.largeMargin, marginHorizontal:Margin.xlargeMargin}}>
@@ -156,6 +196,33 @@ export default class CustomerDates extends Component {
                 <Text style={styles.buttonTextStyle}>Add Customer</Text>
               </View>
             </TouchableHighlight>
+
+
+
+            </View>
+
+            <View style={{justifyContent:"space-between", marginBottom:Margin.largeMargin, marginHorizontal:Margin.largeMargin, alignItems:"center", flexDirection:"row", }}>
+              <View style={{justifyContent:"center",  paddingHorizontal:Padding.xlargePadding*2,paddingVertical:Padding.smallPadding, alignItems:"center", borderWidth:2, borderRadius:Sizes.smallBorderRadius,borderColor:Colors.convertHexToRGBA(Colors.primary, .3)}}>
+                <TextInput
+                  placeholder= {this.state.isSearchingByName ? "Search Name" : "Search Address"}
+                  onChangeText={(input) => {
+                    this.state.isSearchingByName ? this.searchForName(input) : this.searchForAddress(input)
+                  }}
+                  onKeyPress={(e) => this.handleKeyPress(e)}
+                />
+
+
+              </View>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setState({isSearchingByName:!this.state.isSearchingByName})
+                }}
+                underlayColor={"transparent"}
+              >
+                <View style={{textAlign:"center", paddingVertical:Padding.smallPadding+2, paddingHorizontal:Padding.mediumPadding, backgroundColor:Colors.primaryLight, borderRadius:Sizes.mediumBorderRadius}}>
+                  <Text style={{fontFamily:Fonts.systemBoldFont, color:"#fff", fontSize:Fonts.mediumFontSize}}>{this.state.isSearchingByName ? "Name" : "Address"}</Text>
+                </View>
+              </TouchableHighlight>
 
             </View>
 

@@ -26,8 +26,10 @@ import Login from "views/auth/login.js"
 import CustomerDetail from 'views/customer_information/customer_detail.js'
 import AddCustomer from 'views/customer_information/add_customer.js'
 import AddForm from 'views/change_order/add_form.js'
+import EditForm from 'views/change_order/edit_form.js'
 import FormDetail from 'views/change_order/form_detail.js'
-
+import FormPreview from 'views/change_order/form_preview.js'
+import EditCustomer from 'views/customer_information/edit_customer.js'
 import Notes from 'views/customer_information/notes.js'
 
 
@@ -68,7 +70,10 @@ function mainAppFlow(){
         <Stack.Screen name="CustomerDetail" component={CustomerDetail} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
         <Stack.Screen name="AddCustomer" component={AddCustomer} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
         <Stack.Screen name="AddForm" component={AddForm} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
+        <Stack.Screen name="EditForm" component={EditForm} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
+        <Stack.Screen name="EditCustomer" component={EditCustomer} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
         <Stack.Screen name="FormDetail" component={FormDetail} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
+        <Stack.Screen name="FormPreview" component={FormPreview} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
         <Stack.Screen name="Notes" component={Notes} options={{ headerShown: false, cardStyleInterpolator: forFade}} />
       </Stack.Navigator>
   )

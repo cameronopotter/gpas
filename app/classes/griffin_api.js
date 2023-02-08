@@ -8,14 +8,15 @@ export function addForm(form){
     .collection("ChangeOrderForms")
     .add({
         customerName:form.customerName,
-        address:form.address,
-        city:form.city,
-        state:form.state,
-        zip:form.zip,
-        homeTel:form.homeTel,
-        officeTel:form.officeTel,
-        contractNumber:form.contractNumber,
+        currentBalance:form.currentBalance,
+        stumpRemoval:form.stumpRemoval,
+        gravel:form.gravel,
+        dirtRemoval:form.dirtRemoval,
+        concretePumpCharge:form.concretePumpCharge,
+        fillDirt:form.fillDirt,
         deletions:form.deletions,
+        misc:form.misc,
+        totalAdjustedAmount:form.totalAdjustedAmount,
         createdAt:firebase.firestore.FieldValue.serverTimestamp(),
         id:""
     }).then(console.log(form)).
@@ -53,6 +54,7 @@ export function addCustomer(customer){
     .add({
         customerName: customer.customerName,
         contractNumber: customer.contractNumber,
+        address: customer.address,
         backfillDate:customer.backfillDate,
         concretePourDate:customer.concretePourDate,
         contractDate:customer.contractDate,

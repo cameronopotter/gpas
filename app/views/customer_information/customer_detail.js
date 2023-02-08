@@ -30,7 +30,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notes from 'views/customer_information/notes.js'
-
+import EditCustomer from 'views/customer_information/edit_customer.js'
 
 
 
@@ -49,13 +49,19 @@ export default class CustomerDetail extends Component {
     const index = this.props.route.params.index
     const docRef = firebase.firestore().collection("Customers").doc(item.id).get()
     return (
-        <View style={{justifyContent:'center', alignItems:'center'}}>
+      <ScrollView style={{marginBottom:0}}>
+        <View style={{justifyContent:'center', alignItems:'center', paddingBottom:50}}>
             <Header style={{marginTop:-30}}/>
             <Text style={{fontSize:Fonts.largeFontSize*1.2, fontFamily:Fonts.systemBoldFont, marginTop:Margin.mediumMargin, marginBottom:Margin.mediumMargin}}>Customer Information</Text>
             <View style={{marginTop:Margin.mediumMargin}}>
                 <View style={{flexDirection:"row"}}>
                     <Text style={styles.keyTextStyle}>Customer Name: </Text>
                     <Text style={styles.valueTextStyle}>{item.customerName ? item.customerName: "Empty Field"}</Text>
+                </View>
+
+                <View style={{flexDirection:"row"}}>
+                    <Text style={styles.keyTextStyle}>Customer Address: </Text>
+                    <Text style={styles.valueTextStyle}>{item.address ? item.address: "Empty Field"}</Text>
                 </View>
 
                 <View style={{flexDirection:"row"}}>
@@ -115,17 +121,17 @@ export default class CustomerDetail extends Component {
 
                 <View style={{flexDirection:"row"}}>
                     <Text style={styles.keyTextStyle}>Deposit Amount: </Text>
-                    <Text style={styles.valueTextStyle}>{item.depositAmount ?  `$ ${item.depositAmount}`: "Empty Field"}</Text>
+                    <Text style={styles.valueTextStyle}>{item.depositAmount ?  item.depositAmount: "Empty Field"}</Text>
                 </View>
 
                 <View style={{flexDirection:"row"}}>
                     <Text style={styles.keyTextStyle}>Total Contract Value: </Text>
-                    <Text style={styles.valueTextStyle}>{item.totalContractValue ?  `$ ${item.totalContractValue}`: "Empty Field"}</Text>
+                    <Text style={styles.valueTextStyle}>{item.totalContractValue ?  item.totalContractValue: "Empty Field"}</Text>
                 </View>
 
                 <View style={{flexDirection:"row"}}>
                     <Text style={styles.keyTextStyle}>Final Total: </Text>
-                    <Text style={styles.valueTextStyle}>{item.finalAmountTotal ? `$ ${item.finalAmountTotal}`: "Empty Field"}</Text>
+                    <Text style={styles.valueTextStyle}>{item.finalAmountTotal ? item.finalAmountTotal: "Empty Field"}</Text>
                 </View>
 
 
@@ -140,7 +146,7 @@ export default class CustomerDetail extends Component {
             underlayColor={'transparent'}
             onPress={() => {
                 firebase.firestore().collection("Customers").doc(item.id).delete().then(()=>{
-                    this.props.navigation.navigate("Homescreen")
+                    this.props.navigation.navigate("CustomerDates")
                     console.log("successfully deleted! ")})
                     .catch((error)=>{
                         console.log("Error removing document:", error)
@@ -155,6 +161,18 @@ export default class CustomerDetail extends Component {
             <TouchableHighlight
             underlayColor={'transparent'}
             onPress={() => {
+                this.props.navigation.navigate("EditCustomer", {item:item})
+            }}
+            >
+                <View style={styles.notesButtonContainer}>
+                    <Text style={{fontFamily:Fonts.systemBoldFont, fontSize:Fonts.mediumFontSize}}>Edit Customer</Text>
+                </View>
+            </TouchableHighlight>
+
+
+            <TouchableHighlight
+            underlayColor={'transparent'}
+            onPress={() => {
                 this.props.navigation.navigate("Notes", {item:item})
             }}
             >
@@ -164,6 +182,7 @@ export default class CustomerDetail extends Component {
             </TouchableHighlight>
 
         </View>
+        </ScrollView>
     )
     }
 

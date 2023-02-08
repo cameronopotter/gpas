@@ -3,6 +3,7 @@
     "name": "gpas",
     "slug": "gpas",
     "version": "1.0.0",
+    "owner":"cameronopotter",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,16 +18,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cameronopotter.gpas-demo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.cameronopotter.gpas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a0af9b68-5740-447f-8d9e-e9ddda0289f2"
+      }
     }
   }
 }

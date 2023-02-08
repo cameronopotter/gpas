@@ -22,7 +22,9 @@ const firebaseConfig = {
 
 let app;
 if(firebase.apps.length === 0){
-    app = firebase.initializeApp(firebaseConfig); 
+    app = firebase.initializeApp(firebaseConfig);
+    firebase.firestore().settings({ experimentalForceLongPolling: true, merge:true }); //add this..
+
 }
 else{
     app = firebase.app()

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
 
 // This returns a local uri that can be shared
-const generateShareableExcel = async (props): Promise<string> => {
+  const generateShareableExcel = async (props): Promise<string> => {
   console.log(props.customers)
   const list = props.customers;
   const now = new Date();
@@ -78,32 +78,23 @@ const generateShareableExcel = async (props): Promise<string> => {
     const worksheet = workbook.addWorksheet('My Sheet', {});
     // Just some columns as used on ExcelJS Readme
     worksheet.columns = [
-      { header: 'Id', key: 'id', width: 10 },
-      { header: 'Customer Last Name', key: 'customerName', width: 28 },
-      { header: 'Contract Date', key: 'contractDate', width: 28, },
-      { header: 'Finance Name', key: 'financeName', width: 28, },
-      { header: 'Pool Layout Approval Date', key: 'poolLayoutApprovalDate', width: 28, },
-      { header: 'Dig Date', key: 'digDate', width: 28, },
+      { header: 'Id', key: 'id', width: 5 },
+      { header: 'Customer Name', key: 'customerName', width: 28 },
+      { header: 'Contract Number', key: 'contractNumber', width:28},
+      { header: 'Dig Date', key: 'digDate', width: 18, },
       { header: 'Liner/Shell Install Date', key: 'linerInstallDate', width: 28, },
-      { header: 'Middle Payment Collected', key: 'middlePaymentCollected', width: 28, },
-      { header: 'Backfill Date', key: 'backfillDate', width: 28, },
-      { header: 'Deck Layout Completed', key: 'deckLayoutCompleted', width: 28, },
-      { header: 'Concrete Pour Date', key: 'concretePourDate', width: 28, },
-      { header: 'Electrical Completed', key: 'electricalCompleted', width: 28, },
-      { header: 'Deposit Amount', key: 'depositAmount', width: 28, },
-      { header: 'Total Contract Value', key: 'totalContractValue', width: 28, },
-      { header: 'Final Total', key: 'finalTotal', width: 28, },
+      { header: 'Middle Payment', key: 'middlePaymentCollected', width: 28, },
+      { header: 'Backfill Date', key: 'backfillDate', width: 20, },
+      { header: 'Deck Layout', key: 'deckLayoutCompleted', width: 20, },
+      { header: 'Concrete Date', key: 'concretePourDate', width: 28, },
     ];
     // Add some test data
     for(let index = 0; index < list.length; ++index){
-      worksheet.addRow({ id: index+1 , customerName: list[index].customerName,
-        contractDate: list[index].contractDate, financeName:list[index].financeName,
-         poolLayoutApprovalDate:list[index].poolLayoutApprovalDate, digDate:list[index].digDate,
+      worksheet.addRow({ id: index+1 , customerName: list[index].customerName, contractNumber: list[index].contractNumber,
+          digDate:list[index].digDate,
             linerInstallDate:list[index].linerInstallDate, middlePaymentCollected:list[index].middlePaymentCollected,
               backfillDate:list[index].backfillDate, deckLayoutCompleted:list[index].deckLayoutCompleted,
-                concretePourDate:list[index].concretePourDate, electricalCompleted:list[index].electricalCompleted,
-                  depositAmount:list[index].depositAmount, totalContractValue:list[index].totalContractValue,
-                    finalTotal:list[index].finalAmountTotal});
+                concretePourDate:list[index].concretePourDate, });
 
     }
 

@@ -40,23 +40,26 @@ import Header from 'views/shared/header.js'
 const REFRESH_VIEW_HEIGHT = 80;
 
 
-export default class AddForm extends Component {
+export default class EditForm extends Component {
 
     state = {
         currentCustomerName: null,
-        currentAddress: null,
-        currentCity: null,
-        currentState: null,
-        currentZip: null,
-        currentHomeTel: null,
-        currentOfficeTel: null,
-        currentContractNumber: null,
+        currentCustomerBalance: null,
+        currentStumpRemoval:null,
+        currentGravel:null,
+        currentDirtRemoval:null,
+        currentConcretePumpCharge:null,
+        currentFillDirt:null,
+        currentMisc:null,
+        currentAdjustedAmt:null,
         currentDeletions: null,
+        currentTotalAdjustedAmount:null,
 
         scrollY: new Animated.Value(0),
       }
 
   render(){
+
     return (
 
       <View style={styles.container}>
@@ -86,11 +89,11 @@ export default class AddForm extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-          placeholder={"Address"}
+          placeholder={"Current Balance"}
           style={styles.inputText}
-          defaultValue={this.state.currentAddress}
+          defaultValue={this.state.currentCustomerBalance}
           onChangeText={(name) => {
-            this.setState({currentAddress:name})
+            this.setState({currentCustomerBalance:name})
           }}
 
           />
@@ -98,11 +101,11 @@ export default class AddForm extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-          placeholder={"City"}
+          placeholder={"Stump Removal"}
           style={styles.inputText}
-          defaultValue={this.state.currentCity}
+          defaultValue={this.state.currentStumpRemoval}
           onChangeText={(name) => {
-            this.setState({currentCity:name})
+            this.setState({currentStumpRemoval:name})
           }}
 
           />
@@ -110,11 +113,11 @@ export default class AddForm extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-          placeholder={"State"}
+          placeholder={"Gravel"}
           style={styles.inputText}
-          defaultValue={this.state.currentState}
+          defaultValue={this.state.currentGravel}
           onChangeText={(name) => {
-            this.setState({currentState:name})
+            this.setState({currentGravel:name})
           }}
 
           />
@@ -122,39 +125,11 @@ export default class AddForm extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-          placeholder={"Zip"}
+          placeholder={"Dirt Removal"}
           style={styles.inputText}
-          defaultValue={this.state.currentZip}
+          defaultValue={this.state.currentDirtRemoval}
           onChangeText={(name) => {
-            this.setState({currentZip:name})
-          }}
-
-          />
-        </View>
-
-
-
-        <View style={styles.inputContainer}>
-          <TextInput
-          placeholder={"Home Telephone"}
-          style={styles.inputText}
-          defaultValue={this.state.currentHomeTel}
-          onChangeText={(name) => {
-            this.setState({currentHomeTel:name})
-          }}
-
-          />
-        </View>
-
-
-
-        <View style={styles.inputContainer}>
-          <TextInput
-          placeholder={"Office Telephone"}
-          style={styles.inputText}
-          defaultValue={this.state.currentOfficeTel}
-          onChangeText={(name) => {
-            this.setState({currentOfficeTel:name})
+            this.setState({currentDirtRemoval:name})
           }}
 
           />
@@ -162,15 +137,33 @@ export default class AddForm extends Component {
 
         <View style={styles.inputContainer}>
           <TextInput
-          placeholder={"Contract Number"}
+          placeholder={"Concrete Pump Charge"}
           style={styles.inputText}
-          defaultValue={this.state.currentContractNumber}
+          defaultValue={this.state.currentConcretePumpCharge}
           onChangeText={(name) => {
-            this.setState({currentContractNumber:name})
+            this.setState({currentConcretePumpCharge:name})
           }}
 
           />
         </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+          placeholder={"Fill Dirt"}
+          style={styles.inputText}
+          defaultValue={this.state.currentFillDirt}
+          onChangeText={(name) => {
+            this.setState({currentFillDirt:name})
+          }}
+
+          />
+        </View>
+
+
+
+
+
+
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -179,6 +172,30 @@ export default class AddForm extends Component {
           defaultValue={this.state.currentDeletions}
           onChangeText={(name) => {
             this.setState({currentDeletions:name})
+          }}
+
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+          placeholder={"Misc"}
+          style={styles.inputText}
+          defaultValue={this.state.currentMisc}
+          onChangeText={(name) => {
+            this.setState({currentMisc:name})
+          }}
+
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+          placeholder={"Total Adjusted Amount"}
+          style={styles.inputText}
+          defaultValue={this.state.currentTotalAdjustedAmount}
+          onChangeText={(name) => {
+            this.setState({currentTotalAdjustedAmount:name})
           }}
 
           />
@@ -199,14 +216,15 @@ export default class AddForm extends Component {
                  onPress={() => {
                   addForm({
                   customerName:this.state.currentCustomerName ?this.state.currentCustomerName : null,
-                  address:this.state.currentAddress ? this.state.currentAddress : null,
-                  city:this.state.currentCity ? this.state.currentCity : null,
-                  state:this.state.currentState ? this.state.currentState : null,
-                  zip:this.state.currentZip ? this.state.currentZip : null,
-                  homeTel:this.state.currentHomeTel ? this.state.currentHomeTel : null,
-                  officeTel:this.state.currentOfficeTel ? this.state.currentOfficeTel : null,
-                  contractNumber:this.state.currentContractNumber ? this.state.currentContractNumber : null,
+                  currentBalance:this.state.currentCustomerBalance ? this.state.currentCustomerBalance : null,
+                  stumpRemoval:this.state.currentStumpRemoval ? this.state.currentStumpRemoval : null,
+                  gravel:this.state.currentGravel ? this.state.currentGravel : null,
+                  dirtRemoval:this.state.currentDirtRemoval ? this.state.currentDirtRemoval : null,
+                  concretePumpCharge:this.state.currentConcretePumpCharge ? this.state.currentConcretePumpCharge : null,
+                  fillDirt:this.state.currentFillDirt ? this.state.currentFillDirt : null,
                   deletions:this.state.currentDeletions ? this.state.currentDeletions : null,
+                  misc:this.state.currentMisc ? this.state.currentMisc : null,
+                  totalAdjustedAmount:this.state.currentTotalAdjustedAmount ? this.state.currentTotalAdjustedAmount : null,
                  }, this.props.navigation.goBack())
                }
               }
